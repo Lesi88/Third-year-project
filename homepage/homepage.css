@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+  }
+  
+  .search-bar {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+  
+  .search-bar input {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .search-bar button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .search-bar button:hover {
+    background-color: #555;
+  }
+  
+  main {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: 45%;
+  }
+  
+  .attractions, .details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .attraction, .detail {
+    background-color: #eee;
+    padding: 10px;
+    border-radius: 4px;
+    width: 100%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+  
+  .attraction:hover, .detail:hover {
+    background-color: #ddd;
+  }
+  

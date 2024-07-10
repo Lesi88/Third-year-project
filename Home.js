@@ -77,30 +77,30 @@ app.get('/attractions', (req, res) => {
   });
 
 
-/*app.get('/homepage', (req, res) => {
-    const authHeader = req.headers.authorization;
-    if (!authHeader) {
-        return res.status(401).json({ message: 'No token provided.' });
-    }
+  app.put('/attraction/:name', (req, res) => {
+    const { name } = req.params;
+    const { location, description, map_link, image1, image2, image3 } = req.body;
 
-    const token = authHeader.split(' ')[1];
-    jwt.verify(token, secretKey, (err, decoded) => {
+    const sql = 'UPDATE attractions SET location = ?, description = ?, map_link = ?, image1 = ?, image2 = ?, image3 = ? WHERE name = ?';
+    db.run(sql, [location, description, map_link, image1, image2, image3, name], function (err) {
         if (err) {
-            return res.status(401).json({ message: 'Failed to authenticate token.' });
+            return res.status(500).json({ success: false, message: 'Failed to update attraction.' });
         }
-
-        // Fetch homepage data from the database
-        const homepageData = {
-            welcomeMessage: "Welcome to the homepage!",
-            items: [
-                { id: 1, name: "Item 1", description: "Description for item 1" },
-                { id: 2, name: "Item 2", description: "Description for item 2" },
-                { id: 3, name: "Item 3", description: "Description for item 3" }
-            ]
-        };
-        res.json(homepageData);
+        res.status(200).json({ success: true, message: 'Attraction updated successfully!' });
     });
-});*/
+});
+
+app.delete('/attraction/:name', (req, res) => {
+    const { name } = req.params;
+
+    const sql = 'DELETE FROM attractions WHERE name = ?';
+    db.run(sql, [name], function (err) {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'Failed to delete attraction.' });
+        }
+        res.status(200).json({ success: true, message: 'Attraction deleted successfully!' });
+    });
+});
 
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);

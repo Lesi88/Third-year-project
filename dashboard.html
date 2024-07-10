@@ -3,36 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Attraction</title>
+    <title>Attraction Management</title>
     <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
-    <h1>Add Attraction</h1>
-    <form id="attractionForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="location">Location:</label>
-        <input type="text" id="location" name="location" required>
-
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" required></textarea>
-
-        <label for="map_link">Map Link:</label>
-        <input type="url" id="map_link" name="map_link" required>
-
-        <label for="image1">Image 1 URL:</label>
-        <input type="url" id="image1" name="image1" required>
-
-        <label for="image2">Image 2 URL:</label>
-        <input type="url" id="image2" name="image2">
-
-        <label for="image3">Image 3 URL:</label>
-        <input type="url" id="image3" name="image3">
-
-        <button type="submit">Add Attraction</button>
-    </form>
-
+    <div class="container">
+        <h1>Attraction Management</h1>
+        <form id="attractionForm">
+            <input type="hidden" id="attractionId">
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="text" id="location" placeholder="Location" required>
+            <textarea id="description" placeholder="Description" required></textarea>
+            <input type="text" id="map_link" placeholder="Map Link" required>
+            <input type="text" id="image1" placeholder="Image 1 URL" required>
+            <input type="text" id="image2" placeholder="Image 2 URL" required>
+            <input type="text" id="image3" placeholder="Image 3 URL" required>
+            <button type="submit">Submit</button>
+        </form>
+        <ul id="attractionList"></ul>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="dashboard.js"></script>
 </body>

@@ -36,20 +36,21 @@ app.post('/login', (req, res) => {
         if (err || !row) {
             res.json({ success: false, message: 'Login failed. Invalid email or password.' });
         } else {
-            if(password=='admin'){
-                const token = jwt.sign({ id: row.id, email: row.email }, secretKey, { expiresIn: '1h' });
+            if (password === 'admin') {
+                const token = jwt.sign({ id: row.id, email: row.email, name: row.name }, secretKey, { expiresIn: '1h' });
                 return res.json({ success: true, message: 'Login successful!', token, redirectUrl: '/dashboard.html' });
             }
             const passwordMatch = bcrypt.compareSync(password, row.password);
             if (passwordMatch) {
-                const token = jwt.sign({ id: row.id, email: row.email }, secretKey, { expiresIn: '1h' });
-                res.json({ success: true, message: 'Login successful!', token,redirectUrl: '/homepage/homepage.html' });
+                const token = jwt.sign({ id: row.id, email: row.email, name: row.name }, secretKey, { expiresIn: '1h' });
+                res.json({ success: true, message: 'Login successful!', token, redirectUrl: '/homepage/homepage.html' });
             } else {
                 res.json({ success: false, message: 'Login failed. Invalid email or password.' });
             }
         }
     });
 });
+
 
 
 app.post('/add-attraction', (req, res) => {
@@ -99,6 +100,37 @@ app.delete('/attraction/:name', (req, res) => {
             return res.status(500).json({ success: false, message: 'Failed to delete attraction.' });
         }
         res.status(200).json({ success: true, message: 'Attraction deleted successfully!' });
+    });
+});
+
+app.post('/add-review', (req, res) => {
+    const { attraction_name, user_id, rating, comment } = req.body;
+
+    // Check for missing fields
+    if (!attraction_name || !user_id || !rating || !comment) {
+        return res.status(400).json({ success: false, message: 'All fields are required.' });
+    }
+
+    const sql = 'INSERT INTO reviews (attraction_name, user_id, rating, comment) VALUES (?, ?, ?, ?)';
+    db.run(sql, [attraction_name, user_id, rating, comment], function (err) {
+        if (err) {
+            console.error('Failed to add review:', err);
+            return res.status(500).json({ success: false, message: 'Failed to add review.' });
+        }
+        res.status(201).json({ success: true, message: 'Review added successfully!' });
+    });
+});
+
+app.get('/reviews/:attraction_name', (req, res) => {
+    const { attraction_name } = req.params;
+
+    const sql = 'SELECT * FROM reviews WHERE attraction_name = ?';
+    db.all(sql, [attraction_name], (err, rows) => {
+        if (err) {
+            console.error('Failed to fetch reviews:', err);
+            return res.status(500).json({ success: false, message: 'Failed to fetch reviews.' });
+        }
+        res.json({ success: true, data: rows });
     });
 });
 

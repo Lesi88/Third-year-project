@@ -51,10 +51,10 @@ body {
     width: 45%;
   }
   
-  .attractions, .details {
+  .attractions {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
   }
   
   .attraction, .detail {
@@ -69,3 +69,47 @@ body {
     background-color: #ddd;
   }
   
+  #reviewsList {
+    margin-top: 20px;
+  }
+  
+  .review {
+    background: #f9f9f9;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .review p {
+    margin: 5px 0;
+  }
+  
+  .review strong {
+    color: #333;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  form input[type="text"], form input[type="number"], form textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  form button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  form button:hover {
+    background-color: #0056b3;
+  }
